@@ -1,16 +1,58 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+const ordersController = require('../controllers/orders');
 
-const orderController = require("../controller/orders")
+
+router.get('/', async (req, res) => {
+  try {
+    await ordersController.getAll(req, res);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch orders' });
+  }
+});
 
 
-router.get("/", orderController.getAll);
+router.get('/:id', async (req, res) => {
+  try {
+    await ordersController.getSingle(req, res);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
 
-router.get("/:id", orderController.getSingle);
 
-router.post("/", orderController.createOrder);
+router.post('/', async (req, res) => {
+  try {
+    if (!req.body) {
+      return res.status(400).json({ message: 'Request body is required' });
+    }
 
-router.put("/:id", orderController.updateOrder);
+    await ordersController.createOrder(req, res);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create order' });
+  }
+});
 
-router.delete("/:id", orderController.deleteOrder);
+
+router.put('/:id', async (req, res) => {
+  try {
+    if (!req.body) {
+      return res.status(400).json({ message: 'Request body is required' });
+    }
+
+    await ordersController.updateOrder(req, res);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update order' });
+  }
+});
+
+
+router.delete('/:id', async (req, res) => {
+  try {
+    await ordersController.deleteOrder(req, res);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete order' });
+  }
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const mongodb = require('../data/database');
 
-/* GET ALL PRODUCTS */
+/* GET all */
 const getAll = async (req, res) => {
   // #swagger.tags = ['Products']
   try {
@@ -18,7 +18,7 @@ const getAll = async (req, res) => {
   }
 };
 
-/* GET SINGLE PRODUCT */
+/* GET single */
 const getSingle = async (req, res) => {
   // #swagger.tags = ['Products']
   try {
@@ -44,7 +44,7 @@ const getSingle = async (req, res) => {
   }
 };
 
-/* CREATE PRODUCT */
+/* CREATE product */
 const createProduct = async (req, res) => {
   // #swagger.tags = ['Products']
   try {
@@ -91,7 +91,7 @@ const createProduct = async (req, res) => {
   }
 };
 
-/* UPDATE PRODUCT */
+/* UPDATE product*/
 const updateProduct = async (req, res) => {
   // #swagger.tags = ['Products']
   try {
@@ -145,7 +145,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-/* DELETE PRODUCT */
+/* DELETE product */
 const deleteProduct = async (req, res) => {
   // #swagger.tags = ['Products']
   try {
