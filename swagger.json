@@ -5,10 +5,10 @@
     "description": "API documentation for Products and Orders",
     "version": "1.0.0"
   },
-  "host": "cse341project3-htxz.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -51,7 +51,7 @@
                 "customerName": {
                   "example": "any"
                 },
-                "products": {
+                "productName": {
                   "example": "any"
                 },
                 "total": {
@@ -127,7 +127,7 @@
                 "customerName": {
                   "example": "any"
                 },
-                "products": {
+                "productName": {
                   "example": "any"
                 },
                 "total": {
