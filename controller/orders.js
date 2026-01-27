@@ -48,29 +48,30 @@ const getSingle = async (req, res) => {
 const createOrder = async (req, res) => {
   // #swagger.tags = ['Orders']
   try {
-    const { customerName, products, total, status } = req.body;
+    const { customerName, productName, total, status } = req.body;
 
-    if (!customerName || !products || total === undefined || !status) {
+    // Validation
+    if (!customerName || !productName || total === undefined || !status) {
       return res.status(400).json({
-        message: 'Customer name, Products, Total, and status are required'
+        message: 'customerName, productName, total, and status are required'
       });
     }
 
-    if (!Array.isArray(products)) {
+    if (typeof productName !== 'string') {
       return res.status(400).json({
-        message: 'Products must be an array'
+        message: 'productName must be a string'
       });
     }
 
     if (typeof total !== 'number' || total < 0) {
       return res.status(400).json({
-        message: 'Total must be a positive number'
+        message: 'total must be a positive number'
       });
     }
 
     const order = {
       customerName,
-      products,
+      productName,
       total,
       status,
       createdAt: new Date()
@@ -99,23 +100,24 @@ const updateOrder = async (req, res) => {
       return res.status(400).json({ message: 'Invalid order ID format' });
     }
 
-    const { customerName, products, total, status } = req.body;
+    const { customerName, productName, total, status } = req.body;
 
-    if (!customerName || !products || total === undefined || !status) {
+    // Validation
+    if (!customerName || !productName || total === undefined || !status) {
       return res.status(400).json({
-        message: 'Customer Name, Products, Total, and status are required'
+        message: 'customerName, productName, total, and status are required'
       });
     }
 
-    if (!Array.isArray(products)) {
+    if (typeof productName !== 'string') {
       return res.status(400).json({
-        message: 'Products must be an array'
+        message: 'productName must be a string'
       });
     }
 
     if (typeof total !== 'number' || total < 0) {
       return res.status(400).json({
-        message: 'Total must be a positive number'
+        message: 'total must be a positive number'
       });
     }
 
@@ -123,7 +125,7 @@ const updateOrder = async (req, res) => {
 
     const order = {
       customerName,
-      products,
+      productName,
       total,
       status,
       updatedAt: new Date()
