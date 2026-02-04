@@ -10,7 +10,34 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "githubAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "/login",
+      "flow": "implicit"
+    }
+  },
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/login": {
       "get": {
         "description": "",
@@ -27,16 +54,6 @@
         "responses": {
           "default": {
             "description": ""
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -388,6 +405,19 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }

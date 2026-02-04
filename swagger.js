@@ -6,10 +6,19 @@ const doc = {
     description: 'API documentation for Products and Orders'
   },
   host: 'localhost:3000',
-  schemes: ['http']
+  schemes: ['http'],
+
+  securityDefinitions: {
+    githubAuth: {
+      type: 'oauth2',
+      authorizationUrl: '/login',
+      flow: 'implicit'
+    }
+  }
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/index.js'];
+const endpointsFiles = ['./server.js'];
+
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
