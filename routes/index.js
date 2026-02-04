@@ -12,11 +12,6 @@ router.get("/logout", function(req, res, next) {
 });
 
 
-
-router.get('/', (req, res) => {
-  res.status(200).send('Hello! Welcome to my website!');
-});
-
 router.use('/orders', require('./orders'));
 router.use('/products', require('./products'));
 router.use('/', require('./swagger'));
