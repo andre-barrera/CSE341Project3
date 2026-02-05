@@ -35,18 +35,7 @@ router.get(
 );
 
 
-router.get('/status', (req, res) => {
-  if (req.user) {
-    res.json({
-      loggedIn: true,
-      user: req.user.username
-    });
-  } else {
-    res.json({
-      loggedIn: false
-    });
-  }
-});
+
 
 
 router.get('/logout', (req, res, next) => {
