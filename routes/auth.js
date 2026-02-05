@@ -1,31 +1,45 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('../auth/passport');
 
-// Start GitHub Login
-router.get('/login', passport.authenticate('github'));
 
-// GitHub Callback (this stays internal)
+// ---- LOGIN ROUTE ----
+router.get('/login', (req, res, next) => {
+  if (req.user) {
+    return res.send(`
+      <h2>You are already logged in</h2>
+      <p>Current user: <strong>${req.user.username}</strong></p>
+
+      <a href="/api-docs">Go to Swagger API Docs</a><br><br>
+      <a href="/auth/status">View Login Status</a><br><br>
+      <a href="/auth/logout">Logout</a>
+    `);
+  }
+
+  passport.authenticate('github')(req, res, next);
+});
+
+
+// ---- GITHUB CALLBACK ----
 router.get(
   '/callback',
   passport.authenticate('github', {
     failureRedirect: '/'
   }),
   (req, res) => {
-    res.redirect('/api-docs');
+    res.send(`
+      <h2>Login Successful!</h2>
+      <p>Welcome <strong>${req.user.username}</strong></p>
+
+      <a href="/api-docs">Go to Swagger API Docs</a><br><br>
+      <a href="/auth/status">View Login Status</a><br><br>
+      <a href="/auth/logout">Logout</a>
+    `);
   }
 );
 
-// Logout route
-router.get('/logout', (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.json({ message: 'Logged out successfully' });
-  });
-});
 
-// Check login status
+// ---- STATUS ROUTE ----
 router.get('/status', (req, res) => {
   if (req.user) {
     res.json({
@@ -37,6 +51,20 @@ router.get('/status', (req, res) => {
       loggedIn: false
     });
   }
+});
+
+
+// ---- LOGOUT ROUTE ----
+router.get('/logout', (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.send(`
+      <h2>You have been logged out</h2>
+      <a href="/auth/login">Login again</a>
+    `);
+  });
 });
 
 module.exports = router;
