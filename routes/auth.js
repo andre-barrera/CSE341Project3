@@ -8,7 +8,6 @@ router.get('/login', (req, res, next) => {
     return res.send(`
       <h2>You are already logged in</h2>
       <p>Current user: <strong>${req.user.username}</strong></p>
-
       <a href="/api-docs">Go to Swagger API Docs</a><br><br>
       <a href="/auth/logout">Logout</a>
     `);
@@ -33,8 +32,6 @@ router.get(
     `);
   }
 );
-
-
 
 
 
