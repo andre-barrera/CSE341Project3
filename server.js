@@ -1,8 +1,19 @@
 const express = require('express');
 const app = express();
 const mongodb = require('./data/database');
+const session = require('express-session');
+const passport = require('./auth/passport');
 
 const port = process.env.PORT || 3000;
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'supersecret',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.json());
 
@@ -16,6 +27,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// AUTH ROUTES MUST COME FIRST
+app.use('/auth', require('./routes/auth'));
+
+// THEN API ROUTES
 app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {
@@ -27,5 +42,3 @@ mongodb.initDb((err) => {
     );
   }
 });
-
-

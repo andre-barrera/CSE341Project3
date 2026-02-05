@@ -10,6 +10,13 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+  "githubAuth": {
+    "type": "oauth2",
+    "authorizationUrl": "/auth/github",
+    "flow": "implicit"
+  }
+},
   "paths": {
     "/": {
       "get": {

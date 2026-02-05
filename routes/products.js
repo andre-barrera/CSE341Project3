@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const authenticate = require('../middleware/authenticate');
 const productController = require('../controller/products');
 
 router.get('/', async (req, res) => {
@@ -17,7 +18,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
   try {
     if (!req.body) {
       return res.status(400).json({ message: 'Request body is required' });
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticate, async (req, res) => {
   try {
     if (!req.body) {
       return res.status(400).json({ message: 'Request body is required' });
@@ -41,7 +42,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
   try {
     await productController.deleteProduct(req, res);
   } catch (error) {
