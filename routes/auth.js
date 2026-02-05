@@ -11,7 +11,6 @@ router.get('/login', (req, res, next) => {
       <p>Current user: <strong>${req.user.username}</strong></p>
 
       <a href="/api-docs">Go to Swagger API Docs</a><br><br>
-      <a href="/auth/status">View Login Status</a><br><br>
       <a href="/auth/logout">Logout</a>
     `);
   }
@@ -32,7 +31,6 @@ router.get(
       <p>Welcome <strong>${req.user.username}</strong></p>
 
       <a href="/api-docs">Go to Swagger API Docs</a><br><br>
-      <a href="/auth/status">View Login Status</a><br><br>
       <a href="/auth/logout">Logout</a>
     `);
   }
