@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 // AUTH ROUTES MUST COME FIRST
-app.use('/', require('./routes/auth'));
+app.use('/auth', require('./routes/auth'));
 
 // THEN API ROUTES
 app.use('/', require('./routes'));
