@@ -27,10 +27,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// AUTH ROUTES MUST COME FIRST
 app.use('/auth', require('./routes/auth'));
 
-// THEN API ROUTES
 app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {

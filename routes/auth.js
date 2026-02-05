@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('../auth/passport');
 
 
-// ---- LOGIN ROUTE ----
 router.get('/login', (req, res, next) => {
   if (req.user) {
     return res.send(`
@@ -19,7 +18,6 @@ router.get('/login', (req, res, next) => {
 });
 
 
-// ---- GITHUB CALLBACK ----
 router.get(
   '/callback',
   passport.authenticate('github', {
@@ -37,7 +35,6 @@ router.get(
 );
 
 
-// ---- STATUS ROUTE ----
 router.get('/status', (req, res) => {
   if (req.user) {
     res.json({
@@ -52,7 +49,6 @@ router.get('/status', (req, res) => {
 });
 
 
-// ---- LOGOUT ROUTE ----
 router.get('/logout', (req, res, next) => {
   req.logout(function (err) {
     if (err) {
